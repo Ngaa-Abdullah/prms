@@ -1,0 +1,24 @@
+.upload{
+    text-align: center;
+}
+
+.type{
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    
+
+}
+
+.space{
+    width: 250px;
+    height: 40px;
+    min-height: 40px;
+    margin-top: 6.5px;
+}
+
+
+h4{
+    align-items: end;
+}
