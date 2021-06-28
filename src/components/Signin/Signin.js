@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ changeRoute }) {
+
+
+export default function SignIn({ changeRoute, setUser }) {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -67,13 +69,14 @@ export default function SignIn({ changeRoute }) {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        user_id: username,
+        reg_no: username,
         password: password
       })
     })
       .then(response => response.json())
       .then(user => {
-        if(user.user_id) {
+        if(user) {
+          setUser(user)
           changeRoute('studentHome')
         }
       })

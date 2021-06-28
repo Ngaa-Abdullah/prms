@@ -77,7 +77,7 @@ const PostponementPage = () => {
                         onClick={handleSubmission}
                         className={classes.button}
                     >
-                        Send
+                        Submit
                     </Button>
                 </Paper>
             </Grid>

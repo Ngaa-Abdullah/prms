@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function StudentHome() {
+export default function StudentHome({ user }) {
+    
     const [localRoute, setLocalRoute] = useState('Home');
 
     const handleLocalRoute = (localRoute) => {
@@ -83,39 +84,50 @@ export default function StudentHome() {
             >
                 <div className={classes.toolbar} />
                 <Divider />
-                <List>
-                    <ListItem button onClick={() => handleLocalRoute('Home')}>
-                        <ListItemIcon><HomeOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'Home'} />
-                    </ListItem>
+                {!user.role_id ? (
+                    <List>
 
-                    <ListItem button onClick={() => handleLocalRoute('Postponement')}>
-                        <ListItemIcon><CreateNewFolderIcon /> </ListItemIcon>
-                        <ListItemText primary={'Postponement'} />
-                    </ListItem>
+                        <ListItem button onClick={() => handleLocalRoute('Home')}>
+                            <ListItemIcon><HomeOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Home'} />
+                        </ListItem>
 
-                    <ListItem button onClick={() => handleLocalRoute('View Progress')}>
-                        <ListItemIcon><CachedOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'View Progress'} />
-                    </ListItem>
+                        <ListItem button onClick={() => handleLocalRoute('Postponement')}>
+                            <ListItemIcon><CreateNewFolderIcon /> </ListItemIcon>
+                            <ListItemText primary={'Postponement'} />
+                        </ListItem>
 
-                    <ListItem button >
-                        <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'Log Out'} />
-                    </ListItem>
-                    <ListItem button onClick={() => handleLocalRoute('Staff Home')} >
-                        <ListItemIcon><HomeOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'Staff Home'} />
-                    </ListItem>
-                    <ListItem button onClick={() => handleLocalRoute('Approve/Deny Request')}>
-                        <ListItemIcon><DescriptionOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'Approve/Deny Request'} />
-                    </ListItem>
-                    <ListItem button onClick={() => handleLocalRoute('Register user')}>
-                        <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
-                        <ListItemText primary={'Register user'} />
-                    </ListItem>
-                </List>
+                        <ListItem button onClick={() => handleLocalRoute('View Progress')}>
+                            <ListItemIcon><CachedOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'View Progress'} />
+                        </ListItem>
+
+                        <ListItem button >
+                            <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Log Out'} />
+                        </ListItem>
+                    </List>
+                ) :
+                    <List>
+                        <ListItem button onClick={() => handleLocalRoute('Staff Home')} >
+                            <ListItemIcon><HomeOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Staff Home'} />
+                        </ListItem>
+                        <ListItem button onClick={() => handleLocalRoute('Approve/Deny Request')}>
+                            <ListItemIcon><DescriptionOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Approve/Deny Request'} />
+                        </ListItem>
+                        <ListItem button >
+                            <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Log Out'} />
+                        </ListItem>
+                        {/* <ListItem button onClick={() => handleLocalRoute('Register user')}>
+                            <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
+                            <ListItemText primary={'Register user'} />
+                        </ListItem> */}
+                    </List>
+                }
+
                 {/* <Divider /> */}
 
             </Drawer>
@@ -130,9 +142,8 @@ export default function StudentHome() {
                                 <Progress /> :
                                 localRoute === 'Staff Home' ?
                                     <StaffHomePage /> :
-                                    localRoute === 'Approve/Deny Request' ?
-                                    <RequestApproval />:
-                                    <Register />
+                                    <RequestApproval />
+                    // <Register />
                 }
 
             </main>
