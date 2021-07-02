@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import './Progress.css';
@@ -7,49 +7,64 @@ import './Progress.css';
 
 
 const Progress = () => {
+
+    // const files = [{ attachement: "Mustard" }, { attachement: 'YG' }]
+    // let files = []
+    // // const  = []
+
+    // useEffect(() => {
+    //     console.log('Function 2: ', files)
+    // });
+
+    // useEffect(() => {
+    //     fetch('http://localhost:4000/fetch')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             files = data.map(element => element.attachement)
+    //             console.log('Function 1: ', files)
+    //         })
+    //         .catch(err => console.log(err))
+    // });
+
+
+  
     return (
         <div>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Paper className='approval'>
                         <h4>Stages of Approval</h4>
-                        <table>
+                        {/* <table>
                             <thead>
                                 <tr>
                                     <th>S/N</th>
                                     <th>File</th>
-                                    <th>Status</th>
-                                </tr>
+                                    {/* <th>Status</th> */}
+                                {/* </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>NGAA LETTER</td>
-                                    <td>Approved by MOD</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>NGAA LETTER</td>
-                                    <td>Approved by HOD</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>NGAA LETTER</td>
-                                    <td>Approved by Pricipal</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>NGAA LETTER</td>
-                                    <td>Waiting Approval from DVC Academic</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <tbody> */}
+                                {
+                                    // files.map((info, index) => {
+                                    //     return (
+                                    //         <tr key={index}>
+                                    //             <td>{index + 1}</td>
+                                    //             <td>{info}</td>
+                                    //             {/* <td>Approved by MOD</td> */}
+                                    //         </tr>
+
+                                    //     )
+                                    // })
+
+                                    'Hey'
+                                }
+                            {/* </tbody>
+                        </table> */}
+                   
                     </Paper>
                 </Grid>
             </Grid>
 
-        </div>
-    );
+        </div>)
 }
 
 export default Progress;

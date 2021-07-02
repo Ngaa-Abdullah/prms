@@ -69,7 +69,7 @@ export default function SignIn({ changeRoute, setUser }) {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        reg_no: username,
+        reg_no: reg_no,
         password: password
       })
     })

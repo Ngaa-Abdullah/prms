@@ -55,13 +55,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function StudentHome({ user }) {
-    
+
     const [localRoute, setLocalRoute] = useState('Home');
 
     const handleLocalRoute = (localRoute) => {
         setLocalRoute(localRoute)
     }
 
+    // const [info, setInfo] = useState([])
+    let info = [];
+
+    const fetchInformation = () => {
+        fetch('http://localhost:4000/fetch')
+            .then(response => response.json())
+            .then(data => {
+                info = data.map(element => element.attachement);
+            })
+            .catch(err => console.log(err))
+        // handleLocalRoute('View Progress')
+    }
     const classes = useStyles();
 
     return (
@@ -97,7 +109,7 @@ export default function StudentHome({ user }) {
                             <ListItemText primary={'Postponement'} />
                         </ListItem>
 
-                        <ListItem button onClick={() => handleLocalRoute('View Progress')}>
+                        <ListItem button onClick={fetchInformation}>
                             <ListItemIcon><CachedOutlinedIcon /> </ListItemIcon>
                             <ListItemText primary={'View Progress'} />
                         </ListItem>
@@ -121,10 +133,10 @@ export default function StudentHome({ user }) {
                             <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
                             <ListItemText primary={'Log Out'} />
                         </ListItem>
-                        {/* <ListItem button onClick={() => handleLocalRoute('Register user')}>
+                        <ListItem button onClick={() => handleLocalRoute('Register user')}>
                             <ListItemIcon><ExitToAppOutlinedIcon /> </ListItemIcon>
                             <ListItemText primary={'Register user'} />
-                        </ListItem> */}
+                        </ListItem>
                     </List>
                 }
 
@@ -142,8 +154,9 @@ export default function StudentHome({ user }) {
                                 <Progress /> :
                                 localRoute === 'Staff Home' ?
                                     <StaffHomePage /> :
-                                    <RequestApproval />
-                    // <Register />
+                                    localRoute === 'Approve/Deny Request' ?
+                                        <RequestApproval /> :
+                                        <Register />
                 }
 
             </main>
