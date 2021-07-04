@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Signin from './components/Signin/Signin';
-import StudentHome from './components/StudentHome/StudentHome';
+import React, { useState } from "react";
+import Signin from "./components/Signin/Signin";
+import StudentHome from "./components/StudentHome/StudentHome";
 
 const App = () => {
-    const [route, setRoute] = useState("Signin");
-    const [user, setUser] = useState({});
-    
-    const updateUser = (user) => {
-        setUser({...user})
-    }
+  const [route, setRoute] = useState("Signin");
+  const [user, setUser] = useState({});
 
-    // useEffect(() => {
-    //     console.log('Loaded user:', user)
-    // }, []);
+  const updateUser = (user) => {
+    setUser({ ...user });
+  };
 
-
-    const handleRoute = (route) => setRoute(route)
-    return (
-        <div className='App'>
-            {
-                route === 'Signin' ?
-                    <Signin setUser = {updateUser}  changeRoute={handleRoute} /> :
-                    <StudentHome user={user} changeRoute={handleRoute}/>
-            }
-        </div>
-    )
-}
+  const handleRoute = (route) => setRoute(route);
+  return (
+    <div className="App">
+      {route === "Signin" ? (
+        <Signin setUser={updateUser} changeRoute={handleRoute} />
+      ) : (
+        <StudentHome user={user} changeRoute={handleRoute} />
+      )}
+    </div>
+  );
+};
 
 export default App;

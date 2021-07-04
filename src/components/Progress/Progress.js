@@ -1,70 +1,84 @@
-import React, { useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import './Progress.css';
+import React, { useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import "./Progress.css";
+import { useState } from "react";
+import Button from "@material-ui/core/Button";
 
+// files
+import Axios from "axios";
+import fileDownload from "js-file-download";
 
+const Progress = ({ info }) => {
+  // let res = str.substring(4);
 
+  const [information, setInformation] = useState([]);
 
-const Progress = () => {
+  useEffect(() => {
+    fetch("http://1387b821f57a.ngrok.io/info")
+      .then((response) => response.json())
+      .then((results) => {
+        setInformation(results);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-    // const files = [{ attachement: "Mustard" }, { attachement: 'YG' }]
-    // let files = []
-    // // const  = []
+  const handleDownload = (event) => {
+    Axios({
+      url: "http://1387b821f57a.ngrok.io/download",
+      method: "POST",
+      data: {
+        path_name: "attachments\\1625353668641Application Letter CEF.pdf",
+      },
+      responseType: "blob", // Important
+    }).then((response) => {
+      fileDownload(response.data, event.target.innerText);
+    });
+  };
 
-    // useEffect(() => {
-    //     console.log('Function 2: ', files)
-    // });
-
-    // useEffect(() => {
-    //     fetch('http://localhost:4000/fetch')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             files = data.map(element => element.attachement)
-    //             console.log('Function 1: ', files)
-    //         })
-    //         .catch(err => console.log(err))
-    // });
-
-
-  
-    return (
-        <div>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Paper className='approval'>
-                        <h4>Stages of Approval</h4>
-                        {/* <table>
-                            <thead>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>File</th>
-                                    {/* <th>Status</th> */}
-                                {/* </tr>
-                            </thead>
-                            <tbody> */}
-                                {
-                                    // files.map((info, index) => {
-                                    //     return (
-                                    //         <tr key={index}>
-                                    //             <td>{index + 1}</td>
-                                    //             <td>{info}</td>
-                                    //             {/* <td>Approved by MOD</td> */}
-                                    //         </tr>
-
-                                    //     )
-                                    // })
-
-                                    'Hey'
-                                }
-                            {/* </tbody>
-                        </table> */}
-                   
-                    </Paper>
-                </Grid>
-            </Grid>
-
-        </div>)
-}
+  return (
+    <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Paper className="approval">
+            <h4>Stages of Approval</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>S/N</th>
+                  <th>File</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {information.length === 0 ? (
+                  <tr>{"No Data!"}</tr>
+                ) : (
+                  information.map((info, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <Button
+                            variant="text"
+                            color="default"
+                            onClick={handleDownload}
+                          >
+                            {info.file_name}
+                          </Button>
+                        </td>
+                        <td>{info.status}</td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
+};
 
 export default Progress;
