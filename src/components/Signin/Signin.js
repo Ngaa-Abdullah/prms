@@ -69,7 +69,7 @@ export default function SignIn({ changeRoute, setUser }) {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        reg_no: reg_no,
+        username: username,
         password: password
       })
     })
@@ -131,9 +131,6 @@ export default function SignIn({ changeRoute, setUser }) {
           </Button>
         </form>
       </div>
-      <Box mt={8}>
-        {/* <Copyright /> */}
-      </Box>
     </Container>
   );
 }
