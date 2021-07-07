@@ -1,52 +1,37 @@
-import React from 'react';
-import { Table, Tag, Space } from 'antd';
-
-const { Column, ColumnGroup } = Table;
-
-// const data = [
-//     {
-//         key: '1',
-//         firstName: 'John',
-//         lastName: 'Brown',
-//         age: 32,
-//         address: 'New York No. 1 Lake Park',
-//         tags: ['nice', 'developer'],
-//     },
-//     {
-//         key: '2',
-//         firstName: 'Jim',
-//         lastName: 'Green',
-//         age: 42,
-//         address: 'London No. 1 Lake Park',
-//         tags: ['loser'],
-//     },
-//     {
-//         key: '3',
-//         firstName: 'Joe',
-//         lastName: 'Black',
-//         age: 32,
-//         address: 'Sidney No. 1 Lake Park',
-//         tags: ['cool', 'teacher'],
-//     },
-// ];
-
+import React from "react";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import './RequestApproval.css'
 
 const RequestApproval = () => {
-    return (
-        <div>
-            <Table >
-                <ColumnGroup title="Name">
-                    <Column title="First Name" dataIndex="firstName" key="firstName" />
-                    <Column title="Last Name" dataIndex="lastName" key="lastName" />
-                </ColumnGroup>
-                <Column title="Letter"  dataIndex='Letter' key="letter" />
-                <Column title="Type" dataIndex="Type" key="Type" />
-                <Column title="Status" dataIndex="status" key="status"
-                />
-                
-            </Table>
-        </div>
-    );
-}
+  return (
+    <div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Paper className="approval">
+          <h4>Stages of Approval</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>File</th>
+                <th>Approve or Deny</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td></td>
+                <td className = 'status'>
+                  <button>Approve</button>
+                  <button>Deny</button>
+                </td>
+              </tr>
+            </thead>
+          </table>
+        </Paper>
+      </Grid>
+    </Grid>
+  </div>
+  );
+};
 
 export default RequestApproval;
