@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import "./RequestApproval.css";
+import Axios from "axios";
+import fileDownload from "js-file-download";
+
 
 const RequestApproval = () => {
   const [new_requests, setNew_requests] = useState([]);
 
   useEffect(() => {
-    fetch("http://6381dc4ff902.ngrok.io/requests")
+    fetch("http://localhost:4000/requests")
       .then((response) => response.json())
       .then((results) => {
         setNew_requests(results);
@@ -17,7 +20,7 @@ const RequestApproval = () => {
   }, []);
 
   const approveRequest = (file) => {
-    fetch("http://6381dc4ff902.ngrok.io/app_or_dn", {
+    fetch("http://localhost:4000/app_or_dn", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -33,7 +36,7 @@ const RequestApproval = () => {
   };
 
   const denyRequest = (file) => {
-    fetch("http://6381dc4ff902.ngrok.io/app_or_dn", {
+    fetch("http://localhost:4000/app_or_dn", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -48,6 +51,20 @@ const RequestApproval = () => {
       .catch((err) => console.error(err));
   };
 
+  const handleDownload = (file) => {
+    Axios({
+      url: "http://localhost:4000/download",
+      method: "POST",
+      data: {
+        path_name: file.attachement,
+      },
+      responseType: "blob", // Important
+    }).then((response) => {
+      fileDownload(response.data, file.file_name);
+    });
+  };
+
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -59,6 +76,8 @@ const RequestApproval = () => {
                 <tr>
                   <th>S/N</th>
                   <th>File</th>
+                  <th>Type</th>
+                  <th>Registration_no</th>
                   <th>Approve or Deny</th>
                 </tr>
               </thead>
@@ -71,7 +90,13 @@ const RequestApproval = () => {
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{req_data.file_name}</td>
+                        <td>
+                          <button onClick={() => handleDownload(req_data)}>
+                          {req_data.file_name}
+                          </button>
+                        </td>
+                        <td>{ req_data.name }</td>
+                        <td>{req_data.reg_no}</td>
                         <td className="status">
                           <button onClick={() => approveRequest(req_data)}>
                             Approve

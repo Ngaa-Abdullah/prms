@@ -25,7 +25,7 @@ const PostponementPage = ({ updateInfo }) => {
     formData.append("file", selectedFile);
     formData.append("type_id", option);
 
-    fetch("http://6381dc4ff902.ngrok.io/upload", {
+    fetch("http://localhost:4000/upload", {
       method: "post",
       body: formData,
     })

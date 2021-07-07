@@ -16,7 +16,7 @@ const Progress = ({ info }) => {
   const [requestInfo, setRequestInfo] = useState([]);
 
   useEffect(() => {
-    fetch("http://6381dc4ff902.ngrok.io/info")
+    fetch("http://localhost:4000/info")
       .then((response) => response.json())
       .then((results) => {
         setInformation(results);
@@ -25,26 +25,26 @@ const Progress = ({ info }) => {
     return () => {};
   }, []);
 
-  // useEffect(() => {
-  //   fetch("http://6d51fd0cb80a.ngrok.io/requests")
-  //     .then((response) => response.json())
-  //     .then((results) => {
-  //       setRequestInfo(results);
-  //     })
-  //     .catch((error) => console.log(error));
-  //   return () => {};
-  // }, []);
+  useEffect(() => {
+    fetch("http://localhost:4000/requests")
+      .then((response) => response.json())
+      .then((results) => {
+        setRequestInfo(results);
+      })
+      .catch((error) => console.log(error));
+    return () => {};
+  }, []);
 
-  const handleDownload = (event) => {
+  const handleDownload = (file) => {
     Axios({
       url: "http://localhost:4000/download",
       method: "POST",
       data: {
-        path_name: "attachments\\1625353668641Application Letter CEF.pdf",
+        path_name: file.attachement,
       },
       responseType: "blob", // Important
     }).then((response) => {
-      fileDownload(response.data, event.target.innerText);
+      fileDownload(response.data, file.file_name);
     });
   };
 
@@ -74,7 +74,7 @@ const Progress = ({ info }) => {
                           <Button
                             variant="text"
                             color="default"
-                            onClick={handleDownload}
+                            onClick={handleDownload(info)}
                           >
                             {info.file_name}
                           </Button>

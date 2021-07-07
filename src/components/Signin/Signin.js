@@ -45,7 +45,7 @@ export default function SignIn({ changeRoute, setUser }) {
   const handleSignin = (e) => {
     e.preventDefault();
 
-    fetch("http://6381dc4ff902.ngrok.io/signin", {
+    fetch("http://localhost:4000/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -55,9 +55,11 @@ export default function SignIn({ changeRoute, setUser }) {
     })
       .then((response) => response.json())
       .then((user) => {
-        if (user) {
+        if (user.id) {
           setUser(user);
           changeRoute("Student Home");
+        } else {
+          alert('Enter correct credentials!')
         }
       })
       .catch((err) => console.log(err));
