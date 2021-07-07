@@ -1,4 +1,12 @@
-.status{
-    display: flex;
-    justify-content: space-evenly;
+.status {
+  display: flex;
+  justify-content: space-evenly;
+  border-collapse: collapse;
 }
+
+/* table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+} */

@@ -64,7 +64,7 @@ export default function StudentHome({ user, changeRoute }) {
 
   const handleLogout = () => {
     changeRoute("Signin");
-  }
+  };
   const classes = useStyles();
 
   return (
@@ -77,6 +77,7 @@ export default function StudentHome({ user, changeRoute }) {
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -85,7 +86,14 @@ export default function StudentHome({ user, changeRoute }) {
         }}
         anchor="left"
       >
-        <div className={classes.toolbar} />
+        <div className={classes.toolbar}>
+          {!user.role_id ? (
+            <strong>STUDENT</strong>
+          ) : (
+            <strong>{user.name}</strong>
+          )}
+        </div>
+
         <Divider />
         {!user.role_id ? (
           <List>
@@ -110,7 +118,7 @@ export default function StudentHome({ user, changeRoute }) {
               <ListItemText primary={"View Progress"} />
             </ListItem>
 
-            <ListItem button onClick={handleLogout} > 
+            <ListItem button onClick={handleLogout}>
               <ListItemIcon>
                 <ExitToAppOutlinedIcon />{" "}
               </ListItemIcon>
@@ -119,11 +127,11 @@ export default function StudentHome({ user, changeRoute }) {
           </List>
         ) : (
           <List>
-            <ListItem button onClick={() => handleLocalRoute("Staff Home")}>
+            <ListItem button onClick={() => handleLocalRoute("Home")}>
               <ListItemIcon>
                 <HomeOutlinedIcon />{" "}
               </ListItemIcon>
-              <ListItemText primary={"Staff Home"} />
+              <ListItemText primary={"Home"} />
             </ListItem>
             <ListItem
               button
@@ -134,7 +142,7 @@ export default function StudentHome({ user, changeRoute }) {
               </ListItemIcon>
               <ListItemText primary={"Approve/Deny Request"} />
             </ListItem>
-            <ListItem button onClick={handleLogout} >
+            <ListItem button onClick={handleLogout}>
               <ListItemIcon>
                 <ExitToAppOutlinedIcon />{" "}
               </ListItemIcon>
@@ -153,19 +161,19 @@ export default function StudentHome({ user, changeRoute }) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {localRoute === "Home" ? (
-          <HomePage />
-        ) : localRoute === "Postponement" ? (
-          <PostponementPage updateInfo={updateInfo} />
-        ) : localRoute === "View Progress" ? (
-          <Progress info={info} />
-        ) : localRoute === "Staff Home" ? (
-          <StaffHomePage />
-        ) : localRoute === "Approve/Deny Request" ? (
-          <RequestApproval />
-        ) : (
-             <Signin />
-        )
+
+        {
+          localRoute === "Postponement" ? (
+            <PostponementPage updateInfo={updateInfo} />
+          ) : localRoute === "View Progress" ? (
+            <Progress info={info} />
+          ) : localRoute === "Home" ? (
+            <HomePage user={user} />
+          ) : localRoute === "Approve/Deny Request" ? (
+            <RequestApproval />
+          ) : (
+            <Signin />
+          )
           // : (
           //   <Register />
           // )

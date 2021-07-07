@@ -13,15 +13,27 @@ const Progress = ({ info }) => {
   // let res = str.substring(4);
 
   const [information, setInformation] = useState([]);
+  const [requestInfo, setRequestInfo] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/info")
+    fetch("http://6381dc4ff902.ngrok.io/info")
       .then((response) => response.json())
       .then((results) => {
         setInformation(results);
       })
       .catch((error) => console.log(error));
+    return () => {};
   }, []);
+
+  // useEffect(() => {
+  //   fetch("http://6d51fd0cb80a.ngrok.io/requests")
+  //     .then((response) => response.json())
+  //     .then((results) => {
+  //       setRequestInfo(results);
+  //     })
+  //     .catch((error) => console.log(error));
+  //   return () => {};
+  // }, []);
 
   const handleDownload = (event) => {
     Axios({
@@ -67,8 +79,25 @@ const Progress = ({ info }) => {
                             {info.file_name}
                           </Button>
                         </td>
-                        <td> "Waiting for approval" </td>
-                        {/* <td>{info.status}</td> */}
+                        <td>
+                          {info.type_id === 1
+                            ? info.hod_status === "AP"
+                              ? "Approved"
+                              : info.hod_status === "DN"
+                              ? "Denied"
+                              : "Waiting for approval"
+                            : info.type_id === 2
+                            ? info.cp_status === "AP"
+                              ? "Approved"
+                              : info.hod_status === "DN"
+                              ? "Denied"
+                              : "Waiting for approval"
+                            : info.dvc_status === "AP"
+                            ? "Approved"
+                            : info.dvc_status === "DN"
+                            ? "Denied"
+                            : "Waiting for approval"}
+                        </td>
                       </tr>
                     );
                   })
