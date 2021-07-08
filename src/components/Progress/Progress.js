@@ -74,7 +74,7 @@ const Progress = ({ info }) => {
                           <Button
                             variant="text"
                             color="default"
-                            onClick={handleDownload(info)}
+                            onClick={()=>handleDownload(info)}
                           >
                             {info.file_name}
                           </Button>
