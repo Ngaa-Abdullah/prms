@@ -21,7 +21,7 @@ import Progress from "../Progress/Progress";
 import StaffHomePage from "../StaffHomePage/StaffHomePage";
 import RequestApproval from "../RequestApproval/RequestApproval";
 import Signin from "../Signin/Signin";
-// import Register from "../Register/Register";
+import Register from "../Register/Register";
 import { useState } from "react";
 
 const drawerWidth = 240;
@@ -125,7 +125,8 @@ export default function StudentHome({ user, changeRoute }) {
               <ListItemText primary={"Log Out"} />
             </ListItem>
           </List>
-        ) : (
+        )
+        : (
           <List>
             <ListItem button onClick={() => handleLocalRoute("Home")}>
               <ListItemIcon>

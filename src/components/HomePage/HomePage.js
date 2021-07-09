@@ -37,14 +37,13 @@ const HomePage = ({ user }) => {
             downloading and clicking approve button if satisfied with the
             content
           </p>
-          {/* <hr /> */}
-          <h3>Approve/Deny Request</h3>
+          {/* <h3>Approve/Deny Request</h3>
           <p>
             This functionality allow you as administrator to approve or deny the
             submitted student's postponement request by viewing the file after
             downloading and clicking approve button if satisfied with the
             content
-          </p>
+          </p> */}
           <hr />
         </div>
       )}

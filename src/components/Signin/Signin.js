@@ -73,7 +73,7 @@ export default function SignIn({ changeRoute, setUser }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          PRMS
         </Typography>
         <form className={classes.form} onSubmit={handleSignin} noValidate>
           <TextField

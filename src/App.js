@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Signin from "./components/Signin/Signin";
 import StudentHome from "./components/StudentHome/StudentHome";
+// import AdminHomePage from "./components/HomePage/AdminHomePage";
 
 const App = () => {
   const [route, setRoute] = useState("Signin");
