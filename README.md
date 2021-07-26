@@ -1,1 +1,1 @@
-# Please switch to `master` branch to see project folders
+# Please switch to `master` branch to see project files
